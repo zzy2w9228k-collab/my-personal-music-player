@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#09070f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Spotify Premium">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Spotify Premium — Personal Edition</title>
+<style>
+:root{color-scheme:dark;--bg:#09070f;--panel:#15111f;--panel2:#211832;--purple:#a855f7;--violet:#7c3aed;--muted:#a79bb7;--text:#f8f5ff;--line:#30243f}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% -10%,#321354 0,transparent 45%),var(--bg);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;padding-bottom:calc(106px + env(safe-area-inset-bottom))}
+button,input{font:inherit}button{border:0;color:inherit;cursor:pointer}.app{max-width:760px;margin:auto;padding:calc(16px + env(safe-area-inset-top)) 17px 20px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:23px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.5px}.logo{width:38px;height:38px;border-radius:13px;background:linear-gradient(145deg,#c084fc,#6d28d9);display:grid;place-items:center;box-shadow:0 7px 25px #8b35e655}.logo svg{width:23px}.tag{font-size:10px;color:#d8b4fe;border:1px solid #70449b;padding:5px 8px;border-radius:20px;letter-spacing:.7px}
+h1{font-size:28px;letter-spacing:-1px;margin:0 0 5px}.sub{color:var(--muted);margin:0 0 19px}.hero{background:linear-gradient(135deg,#29113e,#171022 65%,#24123c);border:1px solid #573276;border-radius:23px;padding:18px;margin-bottom:22px;position:relative;overflow:hidden}.hero:after{content:"♫";position:absolute;font-size:150px;color:#ffffff09;right:5px;top:-35px}.hero small{color:#d8b4fe;font-weight:700;letter-spacing:1px}.hero h2{font-size:22px;margin:8px 0}.hero p{color:#c5b7d5;margin:0 0 14px;font-size:13px}.primary{background:linear-gradient(100deg,#a855f7,#7c3aed);padding:12px 17px;border-radius:14px;font-weight:750;box-shadow:0 8px 24px #7c3aed40}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:21px 0 12px}.section-head h3{font-size:18px;margin:0}.muted{color:var(--muted);font-size:12px}
+.tools{display:flex;gap:9px;margin:12px 0}.tool{background:var(--panel);border:1px solid var(--line);padding:10px 13px;border-radius:13px;font-size:13px}.tool:active,.primary:active{transform:scale(.98)}
+.search{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px 14px;color:var(--text);outline:none;margin:4px 0 9px}.search:focus{border-color:var(--purple)}
+.song{display:flex;align-items:center;gap:12px;padding:10px 4px;border-bottom:1px solid #ffffff0c}.cover{width:47px;height:47px;border-radius:12px;background:linear-gradient(135deg,#54217d,#1c1230);display:grid;place-items:center;flex-shrink:0;color:#e9d5ff;font-size:21px}.songinfo{min-width:0;flex:1}.songtitle{font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.artist{font-size:12px;color:var(--muted);margin-top:4px}.iconbtn{background:transparent;color:#cbb8df;padding:9px;font-size:19px}.empty{padding:24px 15px;text-align:center;color:var(--muted);background:#ffffff05;border:1px dashed #49365d;border-radius:16px}.empty strong{display:block;color:#eee5f7;margin-bottom:7px}
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:5;background:#100c18ed;backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:9px 12px calc(9px + env(safe-area-inset-bottom));display:flex;justify-content:space-around}.tab{background:none;color:#92869f;display:grid;gap:4px;justify-items:center;font-size:10px;min-width:60px}.tab b{font-size:20px;font-weight:500}.tab.active{color:#d8b4fe}
+.player{position:fixed;z-index:6;bottom:calc(62px + env(safe-area-inset-bottom));left:10px;right:10px;max-width:740px;margin:auto;background:#261737;border:1px solid #69418b;border-radius:17px;padding:10px 12px;box-shadow:0 8px 30px #0009;display:none}.player.show{display:block}.playerrow{display:flex;align-items:center;gap:10px}.mini-cover{width:39px;height:39px;border-radius:10px;background:linear-gradient(135deg,#9333ea,#3b0764);display:grid;place-items:center}.now{flex:1;min-width:0}.now strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}.now span{color:#c9b8d7;font-size:11px}.controls{display:flex;align-items:center;gap:9px}.controls button{background:none;font-size:19px;padding:4px}.playbtn{width:36px;height:36px;border-radius:50%;background:#f5eaff!important;color:#271139!important;font-size:16px!important}.progress{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:10px;color:#cbbbd9}.progress input{flex:1;accent-color:#c084fc;height:3px}
+.modal{position:fixed;inset:0;background:#000a;z-index:10;display:none;align-items:flex-end}.modal.open{display:flex}.sheet{background:#171020;border:1px solid var(--line);border-radius:24px 24px 0 0;width:100%;padding:22px 18px calc(24px + env(safe-area-inset-bottom));max-height:80vh;overflow:auto}.sheet h3{margin:0 0 8px}.sheet p{color:var(--muted);font-size:13px}.sheet button{margin-top:10px}
+.toast{position:fixed;z-index:20;top:calc(12px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);background:#332047;border:1px solid #70449b;padding:10px 15px;border-radius:30px;font-size:12px;display:none;white-space:nowrap}
+@media(min-width:650px){.app{padding-top:28px}.hero{padding:24px}.song{padding:12px 7px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><path d="M4 8c5-2 11-1 16 2M5 12c4-1.5 9-1 13 1.5M6 16c3-1 6-.5 9 1"/></svg></div><span>Spotify Premium</span></div>
+    <span class="tag">PERSONAL EDITION</span>
+  </header>
+  <main id="homeView">
+    <h1>Your sound, your rules.</h1><p class="sub">Your music collection. No subscription. No streaming.</p>
+    <section class="hero"><small>YOUR PERSONAL LIBRARY</small><h2>All your music in one place.</h2><p>Import audio from Files and keep your collection available offline on this device.</p><button class="primary" id="importHero">＋ Import your music</button></section>
+    <div class="section-head"><h3>Recently added</h3><span class="muted" id="songCount">0 songs</span></div>
+    <input class="search" id="search" placeholder="Search songs or artists" autocomplete="off">
+    <div id="songList"></div>
+  </main>
+  <main id="playlistsView" hidden>
+    <h1>Your playlists</h1><p class="sub">Make a collection for every mood.</p>
+    <button class="primary" id="newPlaylist">＋ Create playlist</button>
+    <div id="playlistList" style="margin-top:16px"></div>
+  </main>
+  <main id="favoritesView" hidden>
+    <h1>Liked songs</h1><p class="sub">The tracks you've saved.</p><div id="favoriteList"></div>
+  </main>
+  <main id="settingsView" hidden>
+    <h1>Settings</h1><p class="sub">Your player, your way.</p>
+    <div class="hero"><h2>Music stays on this device</h2><p>Imported audio is copied into this app's local storage. It is not uploaded to a music service.</p></div>
+    <div class="tools"><button class="tool" id="importSettings">＋ Import audio files</button><button class="tool" id="exportData">Export library list</button></div>
+    <p class="muted">Supported formats depend on iOS and the browser. MP3, AAC/M4A and WAV are commonly supported. DRM-protected subscription downloads cannot be imported.</p>
+    <p class="muted">Tip: Add this site to your Home Screen from Safari's Share menu. For offline app-shell support, it must be hosted over HTTPS.</p>
+  </main>
+</div>
+<div class="player" id="player">
+  <div class="playerrow"><div class="mini-cover">♫</div><div class="now"><strong id="currentTitle">Nothing playing</strong><span id="currentArtist">Choose a song</span></div><div class="controls"><button id="prev" aria-label="Previous">⏮</button><button class="playbtn" id="playPause" aria-label="Play">▶</button><button id="next" aria-label="Next">⏭</button></div></div>
+  <div class="progress"><span id="elapsed">0:00</span><input id="seek" type="range" min="0" max="1000" value="0"><span id="duration">0:00</span></div>
+</div>
+<nav class="tabs">
+  <button class="tab active" data-view="homeView"><b>⌂</b>Home</button>
+  <button class="tab" data-view="playlistsView"><b>▤</b>Playlists</button>
+  <button class="tab" data-view="favoritesView"><b>♡</b>Liked</button>
+  <button class="tab" data-view="settingsView"><b>⚙</b>Settings</button>
+</nav>
+<input type="file" id="filePicker" accept="audio/*,.mp3,.m4a,.aac,.wav,.aiff,.flac,.ogg" multiple hidden>
+<div class="modal" id="modal"><div class="sheet"><h3 id="modalTitle">Create playlist</h3><p id="modalText">Give your playlist a name.</p><input class="search" id="modalInput" placeholder="Playlist name"><div id="modalActions"></div><button class="tool" id="closeModal">Cancel</button></div></div>
+<div class="toast" id="toast"></div>
+<audio id="audio" preload="metadata"></audio>
+<script>
+const DB='personal-music-db', STORE='tracks', META='meta';
+let db, tracks=[], playlists=[], currentId=null, currentUrl=null, shuffle=false, repeat=false, queue=[];
+const $=id=>document.getElementById(id), audio=$('audio');
+function openDB(){return new Promise((res,rej)=>{let r=indexedDB.open(DB,1);r.onupgradeneeded=()=>{let d=r.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE,{keyPath:'id'});if(!d.objectStoreNames.contains(META))d.createObjectStore(META,{keyPath:'key'});};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+function tx(store,mode='readonly'){return db.transaction(store,mode).objectStore(store)}
+function all(store){return new Promise((res,rej)=>{let r=tx(store).getAll();r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+function put(store,v){return new Promise((res,rej)=>{let r=tx(store,'readwrite').put(v);r.onsuccess=()=>res();r.onerror=()=>rej(r.error);});}
+function del(store,id){return new Promise((res,rej)=>{let r=tx(store,'readwrite').delete(id);r.onsuccess=()=>res();r.onerror=()=>rej(r.error);});}
+function toast(s){$('toast').textContent=s;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2200);}
+function fmt(n){if(!isFinite(n))return'0:00';return Math.floor(n/60)+':'+String(Math.floor(n%60)).padStart(2,'0');}
+function cleanName(n){return n.replace(/\.[^.]+$/,'').replace(/[_-]/g,' ').trim()||'Unknown track';}
+async function refresh(){tracks=await all(STORE);let m=await all(META);let p=m.find(x=>x.key==='playlists');playlists=p?.value||[];render();}
+function render(){let q=$('search').value.toLowerCase();let list=tracks.filter(t=>(t.title+' '+(t.artist||'')).toLowerCase().includes(q)).sort((a,b)=>b.added-a.added);$('songCount').textContent=tracks.length+' songs';$('songList').innerHTML=list.length?list.map(songHTML).join(''):`<div class="empty"><strong>Your library is waiting.</strong>Tap “Import your music” and choose audio files from the Files app.</div>`;
+$('favoriteList').innerHTML=tracks.filter(t=>t.favorite).map(songHTML).join('')||'<div class="empty"><strong>No liked songs yet.</strong>Tap the heart beside a track to save it here.</div>';
+$('playlistList').innerHTML=playlists.length?playlists.map((p,i)=>`<div class="song"><div class="cover">♫</div><div class="songinfo"><div class="songtitle">${esc(p.name)}</div><div class="artist">${p.ids.length} songs</div></div><button class="iconbtn" onclick="openPlaylist(${i})">›</button></div>`).join(''):'<div class="empty"><strong>No playlists yet.</strong>Create one and add tracks from your library.</div>';
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function songHTML(t){return `<div class="song"><div class="cover">♫</div><div class="songinfo" onclick="playTrack('${t.id}')"><div class="songtitle">${esc(t.title)}</div><div class="artist">${esc(t.artist||'Unknown artist')}</div></div><button class="iconbtn" onclick="toggleFavorite('${t.id}')" aria-label="Like">${t.favorite?'♥':'♡'}</button><button class="iconbtn" onclick="trackMenu('${t.id}')">⋯</button></div>`;}
+async function importFiles(files){let count=0;for(const f of files){if(!f.type.startsWith('audio/')&&!/\.(mp3|m4a|aac|wav|aiff|flac|ogg)$/i.test(f.name))continue;let title=cleanName(f.name);let id=crypto.randomUUID();await put(STORE,{id,title,artist:'Unknown artist',name:f.name,type:f.type||'audio/mpeg',blob:f,added:Date.now(),favorite:false});count++;}await refresh();toast(count?`Imported ${count} ${count===1?'track':'tracks'}`:'No compatible audio files selected');}
+function playTrack(id){let t=tracks.find(x=>x.id===id);if(!t)return;if(currentUrl)URL.revokeObjectURL(currentUrl);currentId=id;currentUrl=URL.createObjectURL(t.blob);audio.src=currentUrl;audio.play().catch(()=>toast('Tap play to start audio'));$('player').classList.add('show');$('currentTitle').textContent=t.title;$('currentArtist').textContent=t.artist||'Unknown artist';$('playPause').textContent='Ⅱ';queue=tracks.map(x=>x.id);render();}
+function currentIndex(){return queue.indexOf(currentId)}
+function step(dir){if(!queue.length)return;let i=currentIndex()+dir;if(shuffle){i=Math.floor(Math.random()*queue.length)}else if(i<0)i=repeat?queue.length-1:0;else if(i>=queue.length)i=repeat?0:-1;if(i>=0)playTrack(queue[i]);else{audio.pause();$('playPause').textContent='▶';}}
+async function toggleFavorite(id){let t=tracks.find(x=>x.id===id);if(!t)return;t.favorite=!t.favorite;await put(STORE,t);render();}
+function trackMenu(id){showModal('Track options','Add this track to a playlist, or remove it from your device.', '',[{label:'Add to playlist',fn:()=>addToPlaylist(id)},{label:'Delete imported track',fn:()=>removeTrack(id)}]);}
+async function removeTrack(id){if(currentId===id){audio.pause();currentId=null;$('player').classList.remove('show');}await del(STORE,id);playlists.forEach(p=>p.ids=p.ids.filter(x=>x!==id));await put(META,{key:'playlists',value:playlists});await refresh();toast('Track removed from this app');}
+function showModal(title,text,value,actions){$('modalTitle').textContent=title;$('modalText').textContent=text;$('modalInput').value=value;$('modalInput').style.display=value===null?'none':'block';$('modalActions').innerHTML='';actions.forEach(a=>{let b=document.createElement('button');b.className='primary';b.textContent=a.label;b.style.marginRight='8px';b.onclick=()=>{a.fn();$('modal').classList.remove('open')};$('modalActions').appendChild(b)});$('modal').classList.add('open');}
+function addPlaylist(){showModal('New playlist','Choose a name for your playlist.','',[{label:'Create',fn:async()=>{let name=$('modalInput').value.trim();if(!name)return;playlists.push({id:crypto.randomUUID(),name,ids:[]});await put(META,{key:'playlists',value:playlists});render();toast('Playlist created');}}]);}
+function addToPlaylist(id){if(!playlists.length){toast('Create a playlist first');return;}showModal('Add to playlist','Choose where to add this song.',null,playlists.map((p,i)=>({label:p.name,fn:async()=>{if(!p.ids.includes(id))p.ids.push(id);await put(META,{key:'playlists',value:playlists});toast('Added to '+p.name);}})));}
+function openPlaylist(i){let p=playlists[i];let found=p.ids.map(id=>tracks.find(t=>t.id===id)).filter(Boolean);$('playlistList').innerHTML=`<button class="tool" onclick="render()">← All playlists</button><div class="section-head"><h3>${esc(p.name)}</h3><span class="muted">${found.length} tracks</span></div>${found.map(songHTML).join('')||'<div class="empty">This playlist is empty. Add songs from your library using ⋯.</div>'}`;}
+$('importHero').onclick=$('importSettings').onclick=()=>$('filePicker').click();
+$('filePicker').onchange=e=>{importFiles([...e.target.files]);e.target.value='';};
+$('search').oninput=render;$('newPlaylist').onclick=addPlaylist;$('closeModal').onclick=()=>$('modal').classList.remove('open');
+$('playPause').onclick=()=>{if(!audio.src){if(tracks[0])playTrack(tracks[0].id);return;}if(audio.paused){audio.play();$('playPause').textContent='Ⅱ';}else{audio.pause();$('playPause').textContent='▶';}};
+$('prev').onclick=()=>step(-1);$('next').onclick=()=>step(1);
+audio.ontimeupdate=()=>{if(audio.duration){$('seek').value=audio.currentTime/audio.duration*1000;$('elapsed').textContent=fmt(audio.currentTime);$('duration').textContent=fmt(audio.duration);}};
+$('seek').oninput=()=>{if(audio.duration)audio.currentTime=audio.duration*$('seek').value/1000;};
+audio.onended=()=>{if(repeat){audio.currentTime=0;audio.play();}else step(1);};
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));['homeView','playlistsView','favoritesView','settingsView'].forEach(v=>$(v).hidden=v!==b.dataset.view);});
+$('exportData').onclick=()=>{let data=tracks.map(({title,artist,name,favorite})=>({title,artist,filename:name,favorite}));let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='my-music-library.json';a.click();URL.revokeObjectURL(a.href);};
+(async()=>{try{db=await openDB();await refresh();if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});}catch(e){toast('Storage unavailable in this browser');}})();
+</script>
+</body></html>
