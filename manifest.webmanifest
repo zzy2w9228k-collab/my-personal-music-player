@@ -1,9 +1,0 @@
-{
-  "name": "Spotify Premium \u2014 Personal Edition",
-  "short_name": "My Music",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#09070f",
-  "theme_color": "#09070f",
-  "description": "A personal offline-first music player for your own audio files."
-}
